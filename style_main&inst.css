@@ -1,0 +1,284 @@
+html {
+    height: 100vh;
+    width: 100vw;
+
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+} 
+
+body {
+    width:100%;
+    height: 96%;
+
+    margin:0;
+    background-color: white;
+
+    display:grid;
+    grid-template-rows: 5fr 2fr;
+
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+/* 제목 영역 */
+#title {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+
+    background-color:rgb(72, 94, 154);
+    color: rgb(228, 249, 255);
+
+    padding: 10px;
+}
+
+/* 키오스크 화면 */
+#screen_kiosk {
+    margin: 2% 2% 0 2%;
+
+    display:flex;
+    flex-direction: column;
+
+    background-color:azure;
+    border: 2px solid rgb(72, 94, 154);
+}
+#메인화면, #가는날_시간_선택화면, #인원선택화면, #열차조회화면, #좌석선택화면, #결제화면, #완료화면 {
+    flex:1;
+}
+
+/* 메인 화면 */
+#메인화면 {
+    height: 100%;
+    display:grid;
+    grid-template-rows: 1fr 3fr;
+}
+#메인화면 #역선택 {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    align-items: center;
+
+    border-bottom: 2px solid rgba(72, 94, 154, 0.324);
+}
+#메인화면 #역선택 .station {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+
+    height: 80%;
+    width: 30%;
+
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+
+    align-items: center;
+}
+#메인화면 #역선택 #icon_right {
+    font-size: xx-large;
+    font-weight: bold;
+    color:rgb(72, 94, 154);
+}
+#메인화면 #역선택 .station_출발 {
+    font-size: x-large;
+    font-weight: bold;
+    color:rgb(72, 94, 154);
+}
+#메인화면 #역선택 #station_도착 {
+    font-weight: bold;
+    color:rgb(72, 94, 154);
+}
+
+/* 메인 화면 - 하단부 */
+#메인화면 #나머지화면 {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 3fr 3fr auto;
+}
+#메인화면 #나머지화면 .text {
+    font-size: large;
+    font-weight: bold;
+
+    text-align: center;
+}
+#메인화면 #나머지화면 .icon_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#메인화면 #나머지화면 .icon_down {
+    width: 8%;
+    aspect-ratio: 1/1;
+    background: url(img/arrow_down.png) no-repeat center/cover; 
+}
+/* 메인 화면 - 하단부 - 가는날 */
+#메인화면 #가는날 {
+    width: 100%;
+
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+
+    border-bottom: 2px solid rgba(72, 94, 154, 0.324);
+}
+#메인화면 #가는날 #가는날_text {
+    font-size: large;
+    text-align: center;
+}
+/* 메인 화면 - 하단부 - 인원 선택 */
+#메인화면 #인원 {
+    width: 100%;
+
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+}
+#메인화면 #인원 #인원_text {
+    font-size: large;  
+    text-align: center;
+}
+/* 메인 화면 - 하단부 - 열차 조회 버튼 */
+#메인화면 #열차조회버튼 {
+    height: fit-content;
+
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    background-color: rgb(148, 174, 245);
+    color:rgb(0, 0, 69);
+}
+
+
+/* 출발/도착역 선택창 */
+#출발_도착_선택창 {
+    display:flex;
+    flex-direction: column;
+    height:100%;
+
+    z-index: 500;
+}
+#선택창_top {
+    display:grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    
+    padding-top: 2%;
+    
+    background-color: rgb(125, 145, 201);
+    border-radius: 10px 10px 0 0;
+}
+#선택창_top #확인버튼 {
+    display:flex;
+    font-size:large;
+
+    width: max-content;
+    margin:auto;
+    
+    border-color: rgb(125, 145, 201);
+    border-radius: 5px;
+}
+#선택창_top_text {
+    font-weight: bold;
+}
+
+#선택창_bottom {
+    flex:1;
+    display:flex;
+    flex-direction: column;
+
+    background-color: antiquewhite;
+}
+#선택창_bottom_text { /* 주요역 */
+    padding: 1%;
+
+    background-color: rgb(201, 200, 200);
+    color: rgb(72, 94, 154);
+    font-weight: bold;
+}
+#선택창_bottom #주요역_container {
+    flex:1;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    background-color: rgb(246, 255, 255);
+}
+#주요역_container .역 {
+    display:flex;
+    align-items: center;
+
+    padding-left: 5%;
+
+    border-bottom: 1.5px solid rgb(201, 200, 200);
+
+    font-size: 22px;
+}
+#주요역_container .역:nth-child(2n+1) {
+    border-right: 1.5px solid rgb(201, 200, 200);
+}
+#주요역_container .역:nth-last-child(-n+1) {
+    border-bottom: none;
+}
+#주요역_container .역:nth-last-child(-n+2) {
+    border-bottom: none;
+}
+
+
+/* 지시문 화면 */
+#screen_instruction {
+    display:flex;
+    align-items: center;
+
+    height: 100%;
+
+    padding: 3% 2% 3% 2%;
+    background-color: white;
+}
+#character {
+    width: 25%;
+    aspect-ratio: 1/1;
+    background: url(img/마스코트_smile.png) no-repeat center/cover; 
+}
+#instruction {
+    flex:1;
+    /* text-align: center; */
+    height: 100%;
+    
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 2% 0 2%;
+
+    font-size: large;
+    font-weight: bold;
+
+    word-wrap: break-word;
+    word-break: break-all;
+
+    overflow: auto;
+}
+
+/* 지시문 화면 버튼 */
+#다음지시 {
+    display:block;
+    position:fixed;
+
+    bottom: 2%;
+    right: 5%;
+
+    z-index: 1000;
+    
+    padding: 10px;
+    font-size: large;
+    font-weight: bold;
+
+    background-color: rgb(181, 198, 245);
+    border-color: aliceblue;
+    border-radius: 10px;
+}

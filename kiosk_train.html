@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link 자리 -->
+    <link rel="stylesheet" href="style_main&inst.css">
+    <link rel="stylesheet" href="style_select_date&time.css">
+    <link rel="stylesheet" href="style_select_people.css">
+    <link rel="stylesheet" href="style_select_train.css">
+    <link rel="stylesheet" href="style_select_seat.css">
+    <link rel="stylesheet" href="style_payment.css">
+
+    <title>기차표 예매 키오스크</title>
+</head>
+    
+<body>
+    <!-- script 자리 -->
+    <script src="functions.js"></script>
+
+    <!-- 키오스크 표시 화면 -->
+    <div id="screen_kiosk" style="pointer-events: none;"> 
+        <div id="title">키오스크 연습하기 (기차표 예매)</div>
+        <!-- 메인 화면 -->
+        <div id="메인화면" >
+            <div id="역선택"> <!-- 출발/도착역 -->
+                <div class="station">
+                    출발
+                    <div class="station_출발">동대구</div>
+                </div>
+                <div id="icon_right">→</div>
+                <div class="station" id="지시부분_도착">
+                    도착
+                    <div id="station_도착" onclick="destinationBtn()">도착지를<br>선택해주세요.</div>
+                </div>
+            </div>
+
+            <div id="나머지화면" >
+                <div id="가는날">
+                    <div class="text">가는날</div>
+                    <div id="가는날_text">2024년 XX월 11일 (목) 09:00</div>
+                    <div class="icon_container">
+                        <div class="icon_down" id = "지시부분_가는날" onclick="select_dateBtn()"></div>
+                    </div>
+                </div>
+
+                <div id="인원">
+                    <div class="text">인원 선택</div>
+                    <div id="인원_text">어른 1명</div>
+                    <div class="icon_container">
+                        <div class="icon_down" id = "지시부분_인원" onclick="select_peopleBtn()"></div>
+                    </div>
+                </div>
+
+                <div id="열차조회버튼" onclick="searchTrainBtn()">
+                    열차 조회하기
+                </div>
+            </div>
+
+            <!-- 출발/도착역 선택창 -->
+            <div id="출발_도착_선택창" style="display: none;">
+                <div id="선택창_top">
+                    <button id="확인버튼" onclick="destSelectedBtn()">확인</button>
+                    <div id="선택창_top_text">역을 선택하신 후 확인 버튼을 눌러주세요.</div>
+                </div>
+
+                <div id="선택창_bottom">
+                    <div id="선택창_bottom_text">주요역</div>
+                    <div id="주요역_container">
+                        <div class="역" onclick="destStationBtn('서울')">서울</div>
+                        <div class="역" onclick="destStationBtn('용산')">용산</div>
+                        <div class="역" onclick="destStationBtn('수원')">수원</div>
+                        <div class="역" onclick="destStationBtn('평택')">평택</div>
+                        <div class="역" onclick="destStationBtn('천안')">천안</div>
+                        <div class="역" onclick="destStationBtn('대전')">대전</div>
+                        <div class="역" onclick="destStationBtn('대구')">대구</div>
+                        <div class="역" onclick="destStationBtn('구미')">구미</div>
+                        <div class="역" onclick="destStationBtn('경주')">경주</div>
+                        <div class="역" onclick="destStationBtn('울산')">울산</div>
+                        <div class="역" onclick="destStationBtn('포항')">포항</div>
+                        <div class="역" onclick="destStationBtn('부산')">부산</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 가는날/시간 선택 화면 -->
+        <div id="가는날_시간_선택화면" style="display: none;">
+            <div class="title">가는날 선택</div>
+            <div id="달력">
+                <div id="몇월">2024년 XX월</div>
+                <div id="며칠">
+                    <div id="요일">
+                        <div class="요일 일">일</div>
+                        <div class="요일">월</div>
+                        <div class="요일">화</div>
+                        <div class="요일">수</div>
+                        <div class="요일">목</div>
+                        <div class="요일">금</div>
+                        <div class="요일 토">토</div>
+                    </div>
+                    <div id="날짜">
+                        <div class="주차">
+                            <div class="날짜번호 일 선택불가"></div>
+                            <div class="날짜번호 선택불가">1</div>
+                            <div class="날짜번호 선택불가">2</div>
+                            <div class="날짜번호 선택불가">3</div>
+                            <div class="날짜번호 선택불가">4</div>
+                            <div class="날짜번호 선택불가">5</div>
+                            <div class="날짜번호 토 선택불가">6</div>
+                        </div>
+                        <div class="주차">
+                            <div class="날짜번호 일 선택불가">7</div>
+                            <div class="날짜번호 선택불가">8</div>
+                            <div class="날짜번호 선택불가">9</div>
+                            <div class="날짜번호 선택불가">10</div>
+                            <div class="날짜번호" id="선택된_날짜">11</div>
+                            <div class="날짜번호">12</div>
+                            <div class="날짜번호 토">13</div>
+                        </div>
+                        <div class="주차">
+                            <div class="날짜번호 일">14</div>
+                            <div class="날짜번호">15</div>
+                            <div class="날짜번호">16</div>
+                            <div class="날짜번호">17</div>
+                            <div class="날짜번호">18</div>
+                            <div class="날짜번호">19</div>
+                            <div class="날짜번호 토">20</div>
+                        </div>
+                        <div class="주차">
+                            <div class="날짜번호 일">21</div>
+                            <div class="날짜번호">22</div>
+                            <div class="날짜번호">23</div>
+                            <div class="날짜번호">24</div>
+                            <div class="날짜번호">25</div>
+                            <div class="날짜번호">26</div>
+                            <div class="날짜번호 토">27</div>
+                        </div>
+                        <div class="주차">
+                            <div class="날짜번호 일">28</div>
+                            <div class="날짜번호">29</div>
+                            <div class="날짜번호">30</div>
+                            <div class="날짜번호">31</div>
+                            <div class="날짜번호"></div>
+                            <div class="날짜번호"></div>
+                            <div class="날짜번호 토"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="시간">
+                <div class="text">시간</div>
+                <div id="몇시">
+                    <div class="시간" id="선택된_시간" onclick="timeBtn('09:00', this)">09
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('10:00', this)">10
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('11:00', this)">11
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('12:00', this)">12
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('13:00', this)">13
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('14:00', this)">14
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('15:00', this)">15
+                        <div class="시">시</div>
+                    </div>
+
+                    <div class="시간" onclick="timeBtn('16:00', this)">16
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('17:00', this)">17
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('18:00', this)">18
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('19:00', this)">19
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('20:00', this)">20
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('21:00', this)">21
+                        <div class="시">시</div>
+                    </div>
+                    <div class="시간" onclick="timeBtn('22:00', this)">22
+                        <div class="시">시</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="가는날문구">
+                <div class="text">가는날</div>
+                <div id="가는날_시간">2024년 XX월 11일 (목) 09:00</div>
+            </div>
+
+            <div class="확인버튼" onclick="date_and_timeSelectedBtn()">확인</div>
+        </div>
+
+        <!-- 인원 선택 화면 -->
+        <div id="인원선택화면" style="display: none;">
+            <div class="title">인원 선택</div>
+            <div id="인원선택">
+                <div class="text">최소 1명 - 최대 4명</div>
+                <div id="연령별선택">
+                    <div class="연령대" id="어른">
+                        <div>
+                            <div>어른</div>
+                            <div class="설명">만 13세 이상</div>
+                        </div>
+
+                        <div class="인원수" id="지시부분_어른">
+                            <div id="minus_어른" onclick="minusBtn('어른')">ㅡ</div>
+                            <div id="인원수_어른">1</div>
+                            <div id="plus_어른" onclick="plusBtn('어른')">╋</div>
+                        </div>
+                    </div>
+                    <div class="연령대" id="어린이">
+                        <div>
+                            <div>어린이</div>
+                            <div class="설명">만 6세~12세</div>
+                        </div>
+
+                        <div class="인원수">
+                            <div id="minus_어린이" class="isZero" onclick="minusBtn('어린이')">ㅡ</div>
+                            <div id="인원수_어린이">0</div>
+                            <div id="plus_어린이" onclick="plusBtn('어린이')">╋</div>
+                        </div>
+                    </div>
+                    <div class="연령대" id="경로">
+                        <div>
+                            <div>경로</div>
+                            <div class="설명">만 65세 이상</div>
+                        </div>
+
+                        <div class="인원수" id="지시부분_경로">
+                            <div id="minus_경로" class="isZero" onclick="minusBtn('경로')">ㅡ</div>
+                            <div id="인원수_경로">0</div>
+                            <div id="plus_경로" onclick="plusBtn('경로')">╋</div>
+                        </div>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+
+            <div id="인원문구">
+                <div class="text">인원</div>
+                <div id="총인원">어른 1명</div>
+            </div>
+            <div class="확인버튼" onclick="peopleSelectedBtn()">확인</div>
+        </div>
+
+        <!-- 열차 조회 화면 -->
+        <div id="열차조회화면" style="display: none;">
+            <div class="title">열차 조회</div>
+            <div id="출발to도착">동대구 → 경주</div>
+            <div id="출발일정보">2024년 XX월 11일 (목)</div>
+            
+            <div id="열차목록">
+                <div class="열차정보">
+                    <div>열차</div>
+                    <div>출발</div>
+                    <div>도착</div>
+                    <div>일반실</div>
+                    <div>특/우등</div>
+                </div>
+                <div class="열차">
+                    <div class="열차종류">무궁화호<br>1791</div>
+                    <div class="출발시간">11:21<br>동대구</div>
+                    <div class="도착시간">12:10<br>경주</div>
+                    <div class="일반실" onclick="trainBtn('무궁화호 1791 (일반실)',this)">5,000원</div>
+                    <div>-</div>
+                </div>
+                <div class="열차">
+                    <div class="열차종류">누리로<br>1773</div>
+                    <div class="출발시간">11:40<br>동대구</div>
+                    <div class="도착시간">12:32<br>경주</div>
+                    <div class="일반실" onclick="trainBtn('누리로 1773 (일반실)',this)">5,000원</div>
+                    <div>-</div>
+                </div>
+                <div class="열차">
+                    <div class="열차종류">KTX<br>007</div>
+                    <div class="출발시간">11:55<br>동대구</div>
+                    <div class="도착시간">12:13<br>경주</div>
+                    <div class="일반실 매진">매진</div>
+                    <div class="특실" onclick="trainBtn('KTX 007 (특실)',this)">13,200원</div>
+                </div>
+            </div>
+
+            <div class="확인버튼" onclick="trainSelectedBtn()">선택 완료</div>
+        </div>
+
+        <!-- 좌석 선택 화면 -->
+        <div id="좌석선택화면" style="display: none;">
+            <div class="title">1호차 좌석선택</div>
+            <div id="열차정보">
+                <div>무궁화호 1791 (일반실)</div>
+                <div id="잔여">잔여 4석 / 전체 72석</div>
+            </div>
+
+            <div id="좌석목록">
+                <div class="좌석정보">
+                    <div>창측</div>
+                    <div>내측</div>
+                    <div></div>
+                    <div>내측</div>
+                    <div>창측</div>
+                </div>
+
+                <div class="좌석_한줄">
+                    <div class="좌석 선택불가">69</div>
+                    <div class="좌석 선택불가">70</div>
+                    <div class="방향">▲</div>
+                    <div class="좌석 선택불가">72</div>
+                    <div class="좌석 선택불가">71</div>
+                </div>
+
+                <div class="좌석_한줄">
+                    <div class="좌석 선택불가">65</div>
+                    <div class="좌석 선택불가">66</div>
+                    <div class="방향">▲</div>
+                    <div class="좌석" onclick="seatBtn(68, this)">68</div>
+                    <div class="좌석" onclick="seatBtn(67, this)">67</div>
+                </div>
+                <div class="좌석_한줄">
+                    <div class="좌석 선택불가">61</div>
+                    <div class="좌석" onclick="seatBtn(62, this)">62</div>
+                    <div class="방향">▲</div>
+                    <div class="좌석 선택불가">64</div>
+                    <div class="좌석 선택불가">63</div>
+                </div>
+                <div class="좌석_한줄">
+                    <div class="좌석 선택불가">57</div>
+                    <div class="좌석" onclick="seatBtn(58, this)">58</div>
+                    <div class="방향">▲</div>
+                    <div class="좌석 선택불가">60</div>
+                    <div class="좌석 선택불가">59</div>
+                </div>
+                <div class="좌석_한줄">
+                    <div class="좌석 선택불가">53</div>
+                    <div class="좌석 선택불가">54</div>
+                    <div class="방향">▲</div>
+                    <div class="좌석 선택불가">56</div>
+                    <div class="좌석 선택불가">55</div>
+                </div>
+                
+            </div>
+
+            <div id="좌석문구">
+                <div>선택 좌석</div>
+                <div id="좌석선택_총인원">0명 좌석 선택 / 총 2명</div>
+                <div id="호차_좌석"></div>
+            </div>
+
+            <div class="확인버튼" onclick="seatsSelectedBtn()">선택 완료</div>
+        </div>
+
+        <!-- 결제 화면 -->
+        <div id="결제화면" style="display: none;">
+            <div class="title">결제</div>
+
+            <div id="날짜_열차">
+                <div class="날짜">2024년 XX월 11일 (목)</div>
+                <div class="열차">무궁화호 1791</div>
+            </div>
+
+            <div id="출발도착역_시간">
+                <div class="역">
+                    동대구
+                    <div class="시간">11:21</div>
+                </div>
+                <div class="화살표">→</div>
+                <div class="역">
+                    경주
+                    <div class="시간">12:10</div>
+                </div>
+            </div>
+
+            <div id="좌석정보">1호차 _, _</div>
+
+            <div id="결제금액">
+                <div>총 2개</div>
+                <div class="금액">10,000원</div>
+            </div>
+
+            <div id="할부정보">
+                <div>할부기간</div>
+                <div id="할부기간">
+                    <div class="개월수" onclick="installmentBtn('일시불',this)">일시불</div>
+                    <div class="개월수" onclick="installmentBtn('2개월',this)">2개월</div>
+                    <div class="개월수" onclick="installmentBtn('3개월',this)">3개월</div>
+                    <div class="개월수" onclick="installmentBtn('4개월',this)">4개월</div>
+                    <div class="개월수" onclick="installmentBtn('5개월',this)">5개월</div>
+                    <div class="개월수" onclick="installmentBtn('6개월',this)">6개월</div>
+                </div>
+            </div>
+
+            <div class="확인버튼" onclick="paymentBtn()">결제/발권</div>
+        </div>
+        
+        <!-- 완료 화면 -->
+        <div id="완료화면" style="display: none;">
+            기차표 예매 연습이
+            <br>
+            완료되었습니다
+            <br><br>
+            잘 하셨어요!
+        </div>
+    </div>    
+
+    <!-- 지시문 표시 화면 -->
+    <div id="screen_instruction">
+        <div id="character"></div>
+        <div id="instruction">
+            키오스크 학습을 시작합니다<br><br>
+            음성 안내가 있으니<br>소리를 키워주세요
+            <br><br>(더빙 - 네이버 클로바더빙 AI 보이스)
+        </div>
+    </div>
+
+    <!-- 다음 버튼 -->
+    <button id="다음지시" onclick="instBtn()">학습 시작</button>
+</body>
+
+</html>

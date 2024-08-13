@@ -1,0 +1,87 @@
+/* 좌석 선택 화면 */
+#좌석선택화면 {
+    display:grid;
+    height: 100%;
+
+    grid-template-rows: auto  auto 1fr auto auto;
+}
+
+#열차정보 {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+
+    margin: 3% 0 3% 0;
+}
+#잔여 {
+    font-size: medium;
+    font-weight: normal;
+}
+
+#좌석목록 {
+    display:grid;
+    grid-template-rows: auto 1fr 1fr 1fr 1fr 1fr 0.5fr;
+
+    width: 90%;
+    height: 100%;
+    margin:auto;
+}
+#좌석목록 .좌석정보 {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    text-align: center;
+    padding-top: 2%;
+}
+#좌석목록 .좌석_한줄 {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    font-size: x-large;
+}
+#좌석목록 .좌석, .방향 {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+#좌석목록 .좌석 {
+    width: 80%;
+    height: 70%;
+    margin:auto;
+
+    border: 2px solid rgb(118, 118, 118);
+    border-radius: 15% 15% 40% 40%;
+
+    background-color: white;
+}
+#좌석목록 .선택불가 {
+    background-color: rgb(121, 121, 121);
+    opacity: 0.5;
+}
+#좌석목록 .선택된_좌석 {
+    background-color: rgb(72, 94, 154);
+    color:white;
+}
+
+#좌석문구 {
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+
+    background-color: rgb(76, 92, 138);
+    color:rgb(148, 174, 245);
+
+    text-align: center;
+    font-size: large;
+    padding: 2% 0 2% 0;
+}
+#좌석선택_총인원 {
+    font-size: medium;
+    color:azure;
+
+    margin-top:2%;
+}
+#호차_좌석 {
+    font-size: medium;
+    color:azure;
+}

@@ -1,0 +1,176 @@
+/* 
+    가는날 선택, 인원 선택, 열차 조회, 좌석 선택, 결제 화면의
+    공통 부분 (타이틀, 하단 버튼)
+*/
+.title {
+    height: fit-content;
+
+    font-size: large;
+    /* font-weight: bold; */
+    text-align: center;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    border-top: 1px solid rgb(11, 23, 54);
+
+    color:aliceblue;
+    background-color: rgb(72, 94, 154);
+}
+
+.확인버튼 {
+    height: fit-content;
+
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    background-color: rgb(148, 174, 245);
+    color:rgb(0, 0, 69);
+}
+
+/* 가는날/시간 선택 화면 */
+#가는날_시간_선택화면 {
+    display:grid;
+    height: 100%;
+
+    grid-template-rows: auto 2fr 1fr auto auto;
+}
+/* 가는날 */
+#가는날_시간_선택화면 #달력 {
+    display:grid;
+    align-items: center;
+
+    grid-template-rows: 1fr 5fr;
+}
+#몇월 {
+    width: 80%;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+
+    display:flex;
+    flex-direction: column;
+    margin:auto;
+
+    color:rgb(76, 92, 138);
+}
+#며칠 {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+
+    display:flex;
+    flex-direction: column;
+}
+#며칠 #요일 {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    border-top: 1px solid rgb(198, 198, 198);
+    border-bottom: 1px solid rgb(198, 198, 198);
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+#며칠 .요일 {
+    text-align: center;
+}
+#며칠 .일 {
+    color:red;
+}
+#며칠 .토 {
+    color:deepskyblue
+}
+#며칠 #날짜 {
+    flex:1;
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+#며칠 #날짜 .주차 {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+#날짜 .날짜번호 {
+    font-size: larger;
+    font-weight: bold;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+    margin:2px;
+    /* background-color: antiquewhite; */
+}
+#날짜 .선택불가 {
+    opacity: 0.4;
+}
+#날짜 #선택된_날짜 {
+    background-color: rgb(72, 94, 154);
+    color:aliceblue
+}
+/* 시간 */
+#가는날_시간_선택화면 #시간 {
+    display:flex;
+    flex-direction: column;
+}
+#시간 .text {
+    height: fit-content;
+    color: rgb(148, 174, 245);
+
+    font-weight: bold;
+    text-align: center;
+
+    margin-top: 3%;
+}
+#몇시 {
+    flex:1;
+    margin-top: 2%;
+    margin-bottom:2%;
+
+    display:grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 2px;
+}
+#몇시 .시간 {
+    font-size: large;
+    font-weight: bold;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgb(222, 222, 222);
+}
+#몇시 .시 {
+    font-size: small;
+    font-weight: normal;
+}
+#시간 #선택된_시간 {
+    background-color: rgb(127, 191, 255);
+}
+/* 가는날/시간 하단 문구 */
+#가는날문구 {
+    height: fit-content;
+
+    display:flex;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+
+    background-color: rgb(76, 92, 138);
+}
+#가는날문구 .text {
+    color:rgb(148, 174, 245);
+}
+#가는날_시간 {
+    color:azure;
+    font-weight: lighter;
+}

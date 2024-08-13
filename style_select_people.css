@@ -1,0 +1,93 @@
+/* 인원 선택 화면 */
+#인원선택화면 {
+    display:grid;
+    height: 100%;
+
+    grid-template-rows: auto 1fr auto auto;
+}
+
+#인원선택 {
+    height: 100%;
+
+    display:flex;
+    flex-direction: column;
+}
+#인원선택 .text {
+    text-align: center;
+    padding-top: 3%;
+    padding-bottom: 2%;
+}
+#인원선택 #연령별선택 {
+    flex:1;
+    height: 100%;
+
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr 2fr;
+
+    width: 90%;
+    margin:auto;
+}
+#연령별선택 .연령대 {
+    display:flex;
+    justify-content: space-between;
+
+    font-size: large;
+    font-weight: bold;
+
+    align-items: center;
+
+    border-bottom: 1px solid gray;
+}
+#연령별선택 .연령대 .설명 {
+    font-size: medium;
+    font-weight: normal;
+}
+#연령별선택 .인원수 {
+    width: 30%;
+
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+
+    text-align: center;
+    font-weight: normal;
+}
+#연령별선택 [id ^= "minus_"], [id ^= "plus_"] {
+    margin: 5%;
+    padding: 2%;
+    
+    border-radius: 50%;
+    border: 2px solid rgb(178, 178, 178);
+
+    font-size: medium;
+
+    display:flex;
+    justify-content: center;
+
+    color:dimgray;
+    background-color: white;
+}
+#연령별선택 .isZero {
+    background-color: rgb(178, 178, 178);
+}
+
+/* 인원선택화면 하단 문구 */
+#인원문구 {
+    height: fit-content;
+
+    display:flex;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+
+    background-color: rgb(76, 92, 138);
+}
+#인원문구 .text {
+    color:rgb(148, 174, 245);
+}
+#총인원 {
+    color:azure;
+    font-weight: lighter;
+}
